@@ -15,7 +15,7 @@ PORT=$AUTHORIZATION_SERVICE_PORT node ./authorizationService/server.js &
 bounce -P $ORDER_SERVICE_PORT -p '/api/order' -x http://127.0.0.1:$ORDER_SERVICE_FULFILLMENT_AMBASSADOR_PORT/api/fulfillment-order &
 PROXY_TO=http://127.0.0.1:$ORDER_SERVICE_PORT PORT=$ORDER_SERVICE_FACADE_PORT AUDIENCE=aud:order-service node ./authFacade/server.js &
 PROXY_TO=http://127.0.0.1:$FULFILLMENT_SERVICE_FACADE_PORT \
-    AUTHORIZATION_SERVICE_URL=http://127.0.0.1:$AUTHORIZATION_SERVICE_PORT \
+    AUTHORIZATION_URL=http://127.0.0.1:$AUTHORIZATION_SERVICE_PORT/oauth2/v2.0/token \
     AUDIENCE=aud:fulfillment-service \
     CLIENT_ID=order-service \
     CLIENT_SECRET=1234 \

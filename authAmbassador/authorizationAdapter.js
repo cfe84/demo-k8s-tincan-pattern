@@ -16,7 +16,7 @@ class authorizationAdapter {
 
     async resolveCacheAsync(audience) {
         const cachedToken = this.tokenCache[audience];
-        if (cachedToken && cachedToken.expiryDate < new Date()) {
+        if (cachedToken && cachedToken.expiryDate > new Date()) {
             return cachedToken.token;
         }
         return null;

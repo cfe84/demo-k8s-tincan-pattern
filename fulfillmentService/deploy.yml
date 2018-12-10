@@ -30,7 +30,7 @@ spec:
         - name: PROXY_TO
           value: "http://localhost:8080"
         - name: AUDIENCE
-          value: "aud:fulfilment-service"
+          value: "aud:fulfillment-service"
 ---
 
 kind: Service

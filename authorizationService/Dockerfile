@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN [ "npm", "install"]
 
 COPY *.js ./
+COPY *.yml ./
 EXPOSE 8010
 ENV PORT=8010
 CMD [ "node", "server.js" ]
