@@ -22,8 +22,8 @@ spec:
         env:
         - name: BOUNCE_COMMAND
           value: "-p '/api/order' -x http://127.0.0.1:8041/api/fulfillment-order -g '/ping' -r 'PONG'"
-      - name: auth-facade
-        image: cfe84/auth-facade
+      - name: auth-decorator
+        image: cfe84/auth-decorator
         ports:
         - containerPort: 8001
         env:

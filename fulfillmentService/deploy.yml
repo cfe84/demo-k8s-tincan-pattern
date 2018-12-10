@@ -22,8 +22,8 @@ spec:
         env:
         - name: BOUNCE_COMMAND
           value: "-p '/api/fulfillment-order' -r 'Order has been fulfilled' -H 'content-type: text/plain'"
-      - name: auth-facade
-        image: cfe84/auth-facade
+      - name: auth-decorator
+        image: cfe84/auth-decorator
         ports:
         - containerPort: 8001
         env:
