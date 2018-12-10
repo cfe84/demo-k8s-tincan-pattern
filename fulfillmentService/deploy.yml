@@ -1,45 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order
+  name: fulfillment
   labels:
-    app: order
+    app: fulfillment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: order
+      app: fulfillment
   template:
     metadata:
       labels:
-        app: order
+        app: fulfillment
     spec:
       containers:
-      - name: order
+      - name: fulfillment
         image: cfe84/bounce
         ports:
         - containerPort: 8080
         env:
         - name: BOUNCE_COMMAND
-          value: "-p '/api/order'  -i -H 'content-type: text/plain'"
-      - name: auth-proxy
-        image: cfe84/auth-proxy
+          value: "-p '/api/fulfillment-order' -r 'Order has been fulfilled' -H 'content-type: text/plain'"
+      - name: auth-facade
+        image: cfe84/auth-facade
         ports:
         - containerPort: 8001
         env:
         - name: PROXY_TO
           value: "http://localhost:8080"
         - name: AUDIENCE
-          value: "aud:order-service"
+          value: "aud:fulfilment-service"
 ---
 
 kind: Service
 apiVersion: v1
 metadata:
-  name: order-service
+  name: fulfillment-service
 spec:
   selector:
-    app: order
+    app: fulfillment
   ports:
   - protocol: TCP
     port: 80

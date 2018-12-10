@@ -3,7 +3,6 @@ const processAuthorizationRequest = require("./processAuthorizationRequest");
 
 const PORT = process.env.PORT || 8010;
 const JWT_SECRET = process.env.SECRET || "mysupersecret";
-const DEFAULT_AUDIENCE = process.env.DEFAULT_AUDIENCE || "aud:general";
 
 const readBodyAsync = (req) => new Promise((resolve, reject) => {
   let data = "";
@@ -21,6 +20,7 @@ const server = http.createServer((req, res) => {
           res.write(JSON.stringify(tokenRecord, null, 2))
         })
         .catch((err) => {
+          console.error(`Authorization Service: Generated an error: ${err}`);
           res.statusCode = 403;
           res.write(`${err}`);
         })
@@ -35,4 +35,4 @@ const server = http.createServer((req, res) => {
   server.on('clientError', (err, socket) => {
     socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
   });
-  server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+  server.listen(PORT, () => console.log(`Authorization Service: Listening on ${PORT}`));

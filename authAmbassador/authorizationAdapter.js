@@ -63,6 +63,7 @@ class authorizationAdapter {
     async authorizeAsync(audience, req, res) {
         let token = await this.resolveCacheAsync(audience);
         if (!token) {
+            console.log("Ambassador: token not found or expired, asking for a fresh one.");
             token = await this.updateCacheAsync(audience);
         }
         req.headers["authorization"] = token;

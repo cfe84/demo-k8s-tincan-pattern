@@ -1,0 +1,14 @@
+{
+  "name": "authambassador",
+  "version": "1.0.0",
+  "description": "",
+  "main": "authorizationAdapter.js",
+  "scripts": {
+    "start": "node server.js",
+    "docker:build": "docker build . -t cfe84/auth-ambassador",
+    "docker:push": "docker push cfe84/auth-ambassador",
+    "docker": "npm run docker:build && npm run docker:push"
+  },
+  "author": "",
+  "license": "ISC"
+}

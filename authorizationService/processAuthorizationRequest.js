@@ -1,17 +1,9 @@
 const jsonWebToken = require("jsonwebtoken");
+const requireYaml = require("require-yml");
+const path = require("path");
+const identities = requireYaml(path.resolve(__dirname, "identities.yml"));
 const TOKEN_EXPIRY_SECONDS = 3600;
 const TOKEN_TYPE = "Bearer";
-
-// In real life this would be stored somewhere
-const identities = {
-    "order-service": {
-        secret: "1234",
-        permissions: {
-            "aud:general": [ "connect-as-service" ], 
-            "aud:fulfilment-service": [ "create-fulfilment" ]
-        }
-    }
-}
 
 const processClientCredentials = (requestAttributes, jwtSecret) => {
     const clientId = requestAttributes.client_id;
@@ -76,6 +68,7 @@ const processAuthorizationRequest = (request, jwtSecret) => {
             " grant_type in the request");
     }
     if (requestAttributes.grant_type === "client_credentials") {
+        console.log(`Authorization Service: creating new token for ${requestAttributes.client_id}`);
         return processClientCredentials(requestAttributes, jwtSecret);
     }
     throw Error("Unknow grant_type: " + grant_type[1]);

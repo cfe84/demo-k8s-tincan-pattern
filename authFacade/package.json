@@ -4,8 +4,11 @@
   "description": "",
   "main": "authenticate.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"AHAHAH! There are no tests! RUN AWAYYYY\" && exit 1",
+    "start": "node server.js",
+    "docker:build": "docker build . -t cfe84/auth-facade",
+    "docker:push": "docker push cfe84/auth-facade",
+    "docker": "npm run docker:build && npm run docker:push"
   },
   "author": "",
   "license": "ISC",

@@ -1,0 +1,13 @@
+order-service:
+  secret: "1234"
+  permissions:
+    "aud:general":
+      - "connect-as-service" 
+    "aud:fulfillment-service":
+      - "create-fulfillment"
+
+front-end:
+  secret: "1234"
+  permissions:
+    "aud:order-service":
+      - "create-order"

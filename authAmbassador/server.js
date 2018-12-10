@@ -20,14 +20,16 @@ const server = http.createServer((req, res) => {
         proxyTo: PROXY_TO,
         path: req.url
     };
+    console.log(`Ambassador: Request received, forwarding to: ${PROXY_TO}${req.url}`);
     authorizationAdapter.authorizeAsync(AUDIENCE, req, res)
         .then(() => proxy(params, req, res))
         .then(() => res.end())
         .catch((error) => {
+            console.error(`Facade: Generated an error: ${error}`);
             res.end(`${error}`);
         });
   });
   server.on('clientError', (err, socket) => {
     socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
   });
-  server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+  server.listen(PORT, () => console.log(`Ambassador: Listening on ${PORT}`));

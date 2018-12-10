@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authorization
+  labels:
+    app: authorization
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authorization
+  template:
+    metadata:
+      labels:
+        app: authorization
+    spec:
+      containers:
+      - name: authorization
+        image: cfe84/authorization-service
+        ports:
+        - containerPort: 8010
+        env:
+        - name: JWT_SECRET
+          value: "mysupersecret"
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: authorization-service
+spec:
+  selector:
+    app: authorization
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8010
+  type: LoadBalancer

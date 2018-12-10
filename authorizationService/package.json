@@ -4,12 +4,17 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Yup, no tests as well...\" && exit 1",
+    "start": "node server.js",
+    "docker:build": "docker build . -t cfe84/authorization-service",
+    "docker:push": "docker push cfe84/authorization-service",
+    "docker": "npm run docker:build && npm run docker:push",
+    "deploy": "kubectl apply -f deploy.yml"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jsonwebtoken": "^8.4.0"
+    "jsonwebtoken": "^8.4.0",
+    "require-yml": "^1.3.1"
   }
 }
