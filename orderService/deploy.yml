@@ -39,7 +39,7 @@ spec:
         - name: PORT
           value: "8041"
         - name: "AUTHORIZATION_URL"
-          value: "http://10.0.168.219:80/oauth2/v2.0/token"
+          value: "http://authorization-service:80/oauth2/v2.0/token"
         - name: AUDIENCE
           value: "aud:fulfillment-service"
         - name: CLIENT_ID
@@ -47,7 +47,7 @@ spec:
         - name: CLIENT_SECRET
           value: "1234"
         - name: PROXY_TO
-          value: "http://10.0.98.202:80"
+          value: "http://fulfillment-service:80"
 
 ---
 
