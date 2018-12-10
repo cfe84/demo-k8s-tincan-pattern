@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  labels:
+    app: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: cfe84/bounce
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BOUNCE_COMMAND
+          value: "-a '*' -r 'This worked, an order is created' -H 'content-type: text/plain'"
+      - name: auth-proxy
+        image: cfe84/auth-proxy
+        ports:
+        - containerPort: 8001
+        env:
+        - name: PROXY_TO
+          value: "http://localhost:8080"
+        - name: AUTHORIZATION_REQUIRES_ROLES
+          value: "order creator,admin"
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8001
+  type: LoadBalancer
