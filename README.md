@@ -1,4 +1,4 @@
-This is a companion demo for the blog post [here](https://www.feval.ca/post/sidecars).
+This is a companion demo for the blog post [here](https://www.feval.ca/post/tincan-phone).
 
 It is trying to demonstrate how to add an authorization layer over an unsecured application
 through containers, using the [decorator](https://en.wikipedia.org/wiki/Decorator_pattern) and 
@@ -34,7 +34,7 @@ The flow is the following:
 
 - **This code is meant for demo purposes only, does not include any tests, and should not be used on production.**
 - An Oauth2 security scheme should never be used on an HTTP scheme. However for the purposes of this demo HTTP was
-    simpler and therefore used. Do not use HTTP to pass on access_tokens and authenticate to an authorization service.
+    simpler than HTTPS and therefore used. Do not use HTTP to pass on access_tokens and authenticate to an authorization service.
     Note that the same patterns (ambassador and decorator) can be used to add TLS to HTTP-only services.
 
 # Services
